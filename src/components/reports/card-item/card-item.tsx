@@ -1,9 +1,9 @@
 import { Avatar, Box, Link, Typography } from "@mui/material";
 import type { FC } from "react";
 
-import { CalendarLogo } from "../../media/calendar";
-import { LinkLogo } from "../../media/link";
-import type { IGetReportsResponse } from "../../store/slices/reports/interfaces/responses.interface";
+import { CalendarLogo } from "../../../media/calendar";
+import { LinkLogo } from "../../../media/link";
+import type { IGetReportsResponse } from "../../../store/slices/reports/interfaces/responses.interface";
 import styles from "./card-item.module.scss";
 
 interface ICardItemProp {

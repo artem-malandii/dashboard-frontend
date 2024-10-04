@@ -1,17 +1,13 @@
 import { Box } from "@mui/material";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
-import styles from "./app.module.scss";
-import { CardItem } from "./components/card-item/card-item";
-import "./index.css";
-import { useGetReportsMutation } from "./store/slices/reports/reports";
+import { useGetReportsMutation } from "../../store/slices/reports/reports";
+import { CardItem } from "./card-item/card-item";
+import styles from "./reports.module.scss";
 
-export function App() {
+export function Reports() {
   const [getReports, { data }] = useGetReportsMutation();
-
-  useEffect(() => {
-    console.log("data:  ", data);
-  }, [data]);
 
   useEffect(() => {
     getReports().unwrap();
@@ -19,6 +15,7 @@ export function App() {
 
   return (
     <Box className={styles.app}>
+      <Link to="/">Back</Link>
       <Box className={styles.cardWrapper}>
         {data && data.map((item) => <CardItem key={item.id} report={item} />)}
       </Box>
