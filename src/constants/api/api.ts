@@ -3,6 +3,6 @@ export const ENDPOINTS = {
     GET_REPORTS: "reports",
   },
   SCREENSHOTS: {
-    GET_SCREENSHOTS: "files",
+    GET_SCREENSHOTS: "time-doctor/files",
   },
 };

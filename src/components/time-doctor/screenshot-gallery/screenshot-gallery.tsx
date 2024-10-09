@@ -1,58 +1,10 @@
 import type { FC } from "react";
 
+import type { ResponseFilesData } from "../../../store/slices/reports/interfaces/responses.interface";
 import styles from "./screenshot-gallery.module.scss";
 
-type ScreenshotMeta = {
-  chunkId: string;
-  clicks: number;
-  movements: number;
-  keys: number;
-  period: number;
-  contentType: string;
-  imageSize: number;
-  imageMd5: string;
-  createdAt: string;
-  h: number;
-  w: number;
-  projectId: string;
-  taskId: string;
-  screenNumber: number;
-  blur: boolean;
-};
-
-type Screenshot = {
-  number: string;
-  mime: string;
-  deleted: boolean;
-  avgActivity: number;
-  meta: ScreenshotMeta;
-  url: string;
-  urls: {
-    original: string;
-    small: string;
-  };
-  entity: string;
-};
-
-type DataItem = {
-  userId: string;
-  date: string;
-  deviceId: string;
-  numbers: Screenshot[];
-};
-
-type ResponseData = {
-  data: DataItem[];
-  paging: {
-    cur: number;
-    limit: number;
-    totalCount: number;
-    nItems: number;
-  };
-};
-
 type Props = {
-  responseData: ResponseData;
+  responseData: ResponseFilesData;
 };
 
 export const ScreenshotGallery: FC<Props> = ({ responseData }) => {

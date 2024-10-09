@@ -1,20 +1,18 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import { ENDPOINTS } from "../../../constants/api/api";
+import type { ResponseFilesData } from "../reports/interfaces/responses.interface";
 
 export const timeDoctorApi = createApi({
   reducerPath: "timeDoctorApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.REACT_APP_TIME_DOCTOR_API_URL,
+    baseUrl: process.env.REACT_APP_BASE_URL,
   }),
   endpoints: (build) => ({
-    getScreenshots: build.mutation<any, void>({
+    getScreenshots: build.mutation<ResponseFilesData, void>({
       query: () => ({
-        url: `${ENDPOINTS.SCREENSHOTS.GET_SCREENSHOTS}?company=Zvv44FGittE1VpXC&user=Zvv7IzEboLpAVxWQ`,
+        url: ENDPOINTS.SCREENSHOTS.GET_SCREENSHOTS,
         method: "GET",
-        headers: {
-          Authorization: "JWT 1o7XoxtjcxPQYZoO4Lc7_kUTe6Xc4BTs5mrbriE-2zfo",
-        },
       }),
     }),
   }),
