@@ -1,7 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import { ENDPOINTS } from "../../../constants/api/api";
-import type { ResponseFilesData } from "../reports/interfaces/responses.interface";
+import type { IScreenshotRequests } from "./interfaces/requests.interface";
+import type {
+  IResponseUsers,
+  ResponseFilesData,
+} from "./interfaces/responses.interface";
 
 export const timeDoctorApi = createApi({
   reducerPath: "timeDoctorApi",
@@ -9,13 +13,30 @@ export const timeDoctorApi = createApi({
     baseUrl: process.env.REACT_APP_BASE_URL,
   }),
   endpoints: (build) => ({
-    getScreenshots: build.mutation<ResponseFilesData, void>({
+    getScreenshots: build.mutation<ResponseFilesData, IScreenshotRequests>({
+      query: (data: IScreenshotRequests) => {
+        const query = new URLSearchParams({
+          userIds: data.userIds.join(","),
+        }).toString();
+
+        const url =
+          data.userIds.length > 0
+            ? `${ENDPOINTS.TIME_DOCTOR.GET_SCREENSHOTS}?${query}`
+            : ENDPOINTS.TIME_DOCTOR.GET_SCREENSHOTS;
+
+        return {
+          url,
+          method: "GET",
+        };
+      },
+    }),
+    getUsers: build.mutation<IResponseUsers, void>({
       query: () => ({
-        url: ENDPOINTS.SCREENSHOTS.GET_SCREENSHOTS,
+        url: ENDPOINTS.TIME_DOCTOR.GET_USERS,
         method: "GET",
       }),
     }),
   }),
 });
 
-export const { useGetScreenshotsMutation } = timeDoctorApi;
+export const { useGetScreenshotsMutation, useGetUsersMutation } = timeDoctorApi;
