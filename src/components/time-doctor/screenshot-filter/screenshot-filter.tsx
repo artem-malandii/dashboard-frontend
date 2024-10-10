@@ -10,6 +10,10 @@ import {
   OutlinedInput,
   Select,
 } from "@mui/material";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import type { Dayjs } from "dayjs";
 import type { FC } from "react";
 import { useState } from "react";
 
@@ -28,11 +32,13 @@ const MenuProps = {
 
 type Props = {
   usersData: IResponseUsers;
-  onApplyClick: (personIds: string[]) => void;
+  onApplyClick: (personIds: string[], dateFilter: string) => void;
 };
 
 export const ScreenshotFilter: FC<Props> = ({ usersData, onApplyClick }) => {
   const [personIds, setPersonIds] = useState<string[]>([]);
+  const [startDate, setStartDate] = useState<Dayjs | null>(null);
+  const [endDate, setEndDate] = useState<Dayjs | null>(null);
 
   const handleChange = (event: SelectChangeEvent<typeof personIds>) => {
     const {
@@ -47,12 +53,26 @@ export const ScreenshotFilter: FC<Props> = ({ usersData, onApplyClick }) => {
       .filter(Boolean)
       .join(", ");
 
+  const getDateFilter = () => {
+    if (startDate && endDate) {
+      return `${startDate.toISOString()}_${endDate.toISOString()}`;
+    }
+    if (startDate) {
+      return `${startDate.toISOString()}_`;
+    }
+    if (endDate) {
+      return `_${endDate.toISOString()}`;
+    }
+    return "";
+  };
+
   return (
     <Box
       sx={{
         display: "flex",
         flexDirection: "row",
-        alignItems: "center",
+        alignItems: "baseline",
+        gap: "15px",
       }}
     >
       <FormControl sx={{ m: 1, width: 300 }}>
@@ -75,7 +95,35 @@ export const ScreenshotFilter: FC<Props> = ({ usersData, onApplyClick }) => {
           ))}
         </Select>
       </FormControl>
-      <Button variant="contained" onClick={() => onApplyClick(personIds)}>
+      <Box>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DemoContainer components={["DatePicker"]}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                gap: "5px",
+              }}
+            >
+              <DatePicker
+                label="Start date"
+                value={startDate}
+                onChange={(newValue) => setStartDate(newValue)}
+              />
+              <DatePicker
+                label="End date"
+                value={endDate}
+                onChange={(newValue) => setEndDate(newValue)}
+              />
+            </Box>
+          </DemoContainer>
+        </LocalizationProvider>
+      </Box>
+      <Button
+        variant="contained"
+        onClick={() => onApplyClick(personIds, getDateFilter())}
+      >
         Apply
       </Button>
     </Box>

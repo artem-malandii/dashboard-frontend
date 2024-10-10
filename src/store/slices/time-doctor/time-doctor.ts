@@ -17,6 +17,7 @@ export const timeDoctorApi = createApi({
       query: (data: IScreenshotRequests) => {
         const query = new URLSearchParams({
           userIds: data.userIds.join(","),
+          date: data.date,
         }).toString();
 
         const url =

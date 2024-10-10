@@ -18,8 +18,8 @@ export function TimeDoctor() {
     getUsers().unwrap();
   }, []);
 
-  const onApplyClick = useCallback((personIds: string[]) => {
-    getScreenshots({ userIds: personIds }).unwrap();
+  const onApplyClick = useCallback((personIds: string[], date: string) => {
+    getScreenshots({ userIds: personIds, date }).unwrap();
   }, []);
 
   return (
