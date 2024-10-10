@@ -3,6 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { ENDPOINTS } from "../../../constants/api/api";
 import type { IScreenshotRequests } from "./interfaces/requests.interface";
 import type {
+  IResponseProject,
   IResponseUsers,
   ResponseFilesData,
 } from "./interfaces/responses.interface";
@@ -37,7 +38,17 @@ export const timeDoctorApi = createApi({
         method: "GET",
       }),
     }),
+    getProjects: build.mutation<IResponseProject, void>({
+      query: () => ({
+        url: ENDPOINTS.TIME_DOCTOR.GET_PROJECTS,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useGetScreenshotsMutation, useGetUsersMutation } = timeDoctorApi;
+export const {
+  useGetScreenshotsMutation,
+  useGetUsersMutation,
+  useGetProjectsMutation,
+} = timeDoctorApi;

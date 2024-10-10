@@ -61,3 +61,17 @@ export interface IResponseUsers {
     nItems: number;
   };
 }
+
+export interface IResponseProject {
+  data: {
+    id: string;
+    name: string;
+    creatorId: string;
+    weight: number;
+    deleted: boolean;
+    scope: string;
+  }[];
+  paging: {
+    nItems: number;
+  };
+}

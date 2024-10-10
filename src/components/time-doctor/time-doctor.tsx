@@ -3,6 +3,7 @@ import { useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import {
+  useGetProjectsMutation,
   useGetScreenshotsMutation,
   useGetUsersMutation,
 } from "../../store/slices/time-doctor/time-doctor";
@@ -13,9 +14,11 @@ export function TimeDoctor() {
   const [getScreenshots, { data: screenshotsData }] =
     useGetScreenshotsMutation();
   const [getUsers, { data: userData }] = useGetUsersMutation();
+  const [getProjects, { data: projectData }] = useGetProjectsMutation();
 
   useEffect(() => {
     getUsers().unwrap();
+    getProjects().unwrap();
   }, []);
 
   const onApplyClick = useCallback((personIds: string[], date: string) => {
@@ -29,8 +32,12 @@ export function TimeDoctor() {
         <span>Time Doctor</span>
       </Box>
       <Box>
-        {userData && (
-          <ScreenshotFilter usersData={userData} onApplyClick={onApplyClick} />
+        {userData && projectData && (
+          <ScreenshotFilter
+            usersData={userData}
+            projectData={projectData}
+            onApplyClick={onApplyClick}
+          />
         )}
       </Box>
       <Box>
