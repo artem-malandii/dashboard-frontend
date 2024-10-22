@@ -7,4 +7,7 @@ export const ENDPOINTS = {
     GET_USERS: "time-doctor/users",
     GET_PROJECTS: "time-doctor/projects",
   },
+  GITHUB: {
+    GET_ACTIVITY: "github-activity",
+  },
 };

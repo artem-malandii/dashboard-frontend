@@ -12,6 +12,7 @@ export function Main() {
     >
       <Link to="/report">Reports</Link>
       <Link to="/time-doctor">Time Doctor</Link>
+      <Link to="/github">GitHub</Link>
     </Box>
   );
 }

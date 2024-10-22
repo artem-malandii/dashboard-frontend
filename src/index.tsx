@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
+import { Github } from "./components/github/github";
 import { Main } from "./components/main/main";
 import { Reports } from "./components/reports/reports";
 import { TimeDoctor } from "./components/time-doctor/time-doctor";
@@ -28,6 +29,11 @@ const router = createBrowserRouter([
   {
     path: "/time-doctor",
     element: <TimeDoctor />,
+    errorElement: <h1>404 Page not found</h1>,
+  },
+  {
+    path: "/github",
+    element: <Github />,
     errorElement: <h1>404 Page not found</h1>,
   },
 ]);

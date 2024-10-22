@@ -1,11 +1,13 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
+import { githubApi } from "./slices/github/github";
 import { reportsApi } from "./slices/reports/reports";
 import { timeDoctorApi } from "./slices/time-doctor/time-doctor";
 
 const rootReducer = combineReducers({
   [reportsApi.reducerPath]: reportsApi.reducer,
   [timeDoctorApi.reducerPath]: timeDoctorApi.reducer,
+  [githubApi.reducerPath]: githubApi.reducer,
 });
 
 export const store = configureStore({
@@ -13,7 +15,8 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       reportsApi.middleware,
-      timeDoctorApi.middleware
+      timeDoctorApi.middleware,
+      githubApi.middleware
     ),
   devTools: process.env.NODE_ENV !== "production",
 });
