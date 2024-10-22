@@ -1,0 +1,24 @@
+.screenshotGallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.screenshotItem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.screenshotItem img {
+  max-width: 30%;
+  height: auto;
+  margin-bottom: 5px;
+}
+
+.screenshotDate {
+  font-size: 14px;
+  color: #555;
+}

@@ -1,0 +1,53 @@
+@import "../../../mixins/scrollbar.mixin";
+
+.cardItem {
+  padding: 16px 20px;
+  width: 450px;
+  height: 500px;
+  background-color: rgb(247 247 247 / 48%);
+  //border: 1px solid #3a75e9;
+  box-shadow: 4px 7px 20px -6px rgba(107, 107, 107, 1);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.date, .link {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 3px;
+}
+
+.report {
+  margin-top: 25px;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  @include scrollbars(3px, #3a75e9, #d9d9d9);
+}
+
+.reportText {
+  padding-right: 15px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
